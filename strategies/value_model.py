@@ -129,8 +129,9 @@ class ValueModelStrategy:
             return None
         
         # Calculate position size based on edge and confidence
-        # Kelly criterion approximation: size = edge / variance
-        # Simplified: size proportional to edge * confidence
+        # Simplified Kelly-like sizing: position proportional to edge * confidence
+        # Note: Not true Kelly criterion (which requires odds and probabilities)
+        # This is a conservative proportional sizing approach
         size_factor = min(abs(edge) * confidence, 1.0)
         size = int(self.max_position_size * size_factor)
         size = max(1, size)  # At least 1 contract

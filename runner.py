@@ -122,10 +122,17 @@ class TradingBot:
         # Simple model function for value strategy (placeholder)
         def simple_model(ticker: str, market_data: dict) -> float:
             """
-            Placeholder model function.
-            In production, this would use ML models, fundamental analysis, etc.
+            Placeholder model function that always returns 0.5 (no edge).
+            
+            WARNING: This placeholder will NOT generate any trading signals.
+            Replace with your actual prediction model before live trading.
+            
+            Should return: probability estimate [0, 1] or tuple of (probability, confidence)
             """
-            # Default to market price (no edge)
+            logger.warning(
+                "Using placeholder model that provides no edge. "
+                "Replace simple_model with actual prediction model before trading."
+            )
             return 0.5
         
         self.value_strategy = ValueModelStrategy(

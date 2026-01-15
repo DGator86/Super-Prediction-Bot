@@ -175,8 +175,11 @@ class YesNoArbitrageStrategy:
         ticker = opportunity.ticker
         size = opportunity.size
         
+        # Calculate actual cost for risk checking
+        total_cost = size * (opportunity.yes_price + opportunity.no_price) * 100  # Convert to cents
+        
         # Check risk limits
-        if not self.risk_manager.can_trade(ticker, size * 100):  # Convert to cents
+        if not self.risk_manager.can_trade(ticker, total_cost):
             logger.warning(f"Risk limits prevent arbitrage on {ticker}")
             return False
         

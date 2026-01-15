@@ -174,13 +174,13 @@ class RiskManager:
         
         logger.info(f"P&L recorded: {pnl:.2f}, Daily P&L: {self.metrics.daily_pnl:.2f}")
         
-        # Check kill switch threshold
-        if self.metrics.daily_pnl <= -self.kill_switch_loss:
+        # Check kill switch threshold (loss values are negative)
+        if self.metrics.daily_pnl <= -abs(self.kill_switch_loss):
             self.activate_kill_switch()
             return
         
-        # Check daily loss threshold
-        if self.metrics.daily_pnl <= -self.max_daily_loss:
+        # Check daily loss threshold (loss values are negative)
+        if self.metrics.daily_pnl <= -abs(self.max_daily_loss):
             self.halt_trading()
     
     def activate_kill_switch(self):
